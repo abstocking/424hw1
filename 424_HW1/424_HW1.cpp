@@ -58,9 +58,7 @@ int main()
 	cout << endl << "input baggage moment arm (in.): ";
 	cin >> bagMom;
 
-	double gross;
-	unsigned int frontWeight, rearWeight, fuelWeight;
-
+	double gross, frontWeight, rearWeight, fuelWeight;
 
 	frontWeight = 0;
 	rearWeight = 0;
@@ -78,10 +76,12 @@ int main()
 
 	// calculates the weight of the fuel
 	fuelWeight = weightPG * useFuel;
+	
 
+	// calculates total weight
 	gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
 
-	int frontMoment, rearMoment, fuelMoment, bagMoment;
+	double frontMoment, rearMoment, fuelMoment, bagMoment, newFuelMoment;
 
 	// finds the individual moments and adds them together
 	frontMoment = frontMom * frontWeight;
@@ -89,13 +89,143 @@ int main()
 	fuelMoment = fuelMom * fuelWeight;
 	bagMoment = bagMom * bagWeight;
 
-	
+	// calculates total moment
+	double totalMoment;
+
+	totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+
+	//calculates the current cg location from initial inputs
+	double CG, counter;
+	counter = 0;
+
+	CG = totalMoment / gross;
 
 
+	// The following series of if else statements and while loops check different cases of the CG, gross weight, and the CG location in relation to the fuel moment arm
+	
 
-	
-	
-	
+	if (CG < 82.1 && gross < 2950)
+	{
+		if (CG < fuelMom)
+		{
+			while (CG < 82.1 && gross < 2950)
+			{
+				fuelWeight += 0.01;
+				counter += 0.01;
+				gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+				fuelMoment = fuelWeight * fuelMom;
+				totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+				CG = totalMoment / gross;
+
+			}
+			cout << "CG is (inches): " << CG << endl;
+			cout << "Gross Weight is (lbs.): " << gross << endl;
+			cout << "Ammount of fuel added is (lbs.): " << counter << endl;
+		}
+		else
+		{
+			while (CG < 82.1 && fuelWeight > 0)
+			{
+				fuelWeight -= 0.01;
+				counter -= 0.01;
+				gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+				fuelMoment = fuelWeight * fuelMom;
+				totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+				CG = totalMoment / gross;
+			}
+			cout << "CG is (inches): " << CG << endl;
+			cout << "Gross Weight is (lbs.): " << gross << endl;
+			cout << "Ammount of fuel removed is (lbs.): " << counter << endl;
+		}
+	}
+	else
+		if (CG > 84.7 && gross > 2950)
+		{
+			if (CG < fuelMom)
+			{
+				while (CG > 84.7 && fuelWeight > 0)
+				{
+					fuelWeight -= 0.01;
+					counter -= 0.01;
+					gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+					fuelMoment = fuelWeight * fuelMom;
+					totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+					CG = totalMoment / gross;
+
+				}
+				cout << "CG is (inches): " << CG << endl;
+				cout << "Gross Weight is (lbs.): " << gross << endl;
+				cout << "Ammount of fuel removed is (lbs.): " << counter << endl;
+			}
+			else
+			{
+				cout << "aircraft cannot meet specifications" << endl;
+			}
+		}
+		else
+			if (CG < 82.1 && gross > 2950)
+			{
+				if (CG < fuelMom)
+				{
+					cout << "aircraft cannot meet specifications" << endl;
+				}
+				else
+				{
+					while (CG < 82.1 && fuelWeight > 0)
+					{
+						fuelWeight -= 0.01;
+						counter -= 0.01;
+						gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+						fuelMoment = fuelWeight * fuelMom;
+						totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+						CG = totalMoment / gross;
+					}
+					cout << "CG is (inches): " << CG << endl;
+					cout << "Gross Weight is (lbs.): " << gross << endl;
+					cout << "Ammount of fuel removed is (lbs.): " << counter << endl;
+				}
+			}
+			else
+				if (CG > 84.7 && gross < 2950) 
+				{
+					if (CG < fuelMom)
+					{
+						while (CG < 82.1 && fuelWeight > 0)
+						{
+							fuelWeight -= 0.01;
+							counter -= 0.01;
+							gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+							fuelMoment = fuelWeight * fuelMom;
+							totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+							CG = totalMoment / gross;
+
+						}
+						cout << "CG is (inches): " << CG << endl;
+						cout << "Gross Weight is (lbs.): " << gross << endl;
+						cout << "Ammount of fuel removed is (lbs.): " << counter << endl;
+					}
+					else
+					{
+						while (CG > 84.7 && gross < 2950)
+						{
+							fuelWeight += 0.01;
+							counter += 0.01;
+							gross = fuelWeight + rearWeight + frontWeight + bagWeight + AEW;
+							fuelMoment = fuelWeight * fuelMom;
+							totalMoment = bagMoment + fuelMoment + rearMoment + frontMoment + airMom;
+							CG = totalMoment / gross;
+						}
+						cout << "CG is (inches): " << CG << endl;
+						cout << "Gross Weight is (lbs.): " << gross << endl;
+						cout << "Ammount of fuel added is (lbs.): " << counter << endl;
+					}
+				}
+				else
+				{
+					cout << "CG is (inches): " << CG << endl;
+					cout << "Gross weight is (lbs.): " << gross << endl;
+				}
+		
 	
 	return 0;
 }
