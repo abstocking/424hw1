@@ -18,20 +18,24 @@ private:
 	
 public:
 
+	// constructor
 	Plane(const string& from, const string& to) : origin(from), destination(to)
 	{
 		
 	}
 
+	// deconstructor
 	~Plane()
 	{
 	}
 
+	//function
 	void operate(double dt)
 	{
 		
 	}
 
+	//get functions
 	double get_pos const ()
 	{
 		return pos;
