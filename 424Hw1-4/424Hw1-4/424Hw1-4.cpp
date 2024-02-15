@@ -20,7 +20,7 @@ public:
 	// constructor
 	Plane(const string& from, const string& to) : origin(from), destination(to) 
 	{
-		origin = from;
+		this->origin = from;
 		destination = to;
 
 		// sets up the container 
@@ -38,7 +38,7 @@ public:
 		vel = 0;
 
 		// outputs the memory location of plane
-		cout << "Plane created at: " << &Plane << endl;
+		cout << "Plane created at: " << this << endl;
 	}
 
 	// deconstructor
@@ -77,35 +77,41 @@ public:
 		}
 	}
 
-	double get_pos ()
+	double get_pos () const
 	{
 		return pos;
 	}
 
-	string get_origin ()
+	string get_origin () const
 	{
 		return origin;
 	}
 
-	string get_destination ()
+	string get_destination () const
 	{
 		return destination;
 	}
 
-	bool get_at_SCE ()
+	bool get_at_SCE () const 
 	{
 		return at_SCE;
 	}
 
-	double get_vel ()
+	double get_vel () const 
 	{
 		return vel;
 	}
 
-	void set_vel(double vel2)
+	void set_vel(const double vel)
 	{
-		vel = vel2;
+		this->vel = vel;
 	}
 
 
 };
+
+int main()
+{
+	
+	return 0;
+}
