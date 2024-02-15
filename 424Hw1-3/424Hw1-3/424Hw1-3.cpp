@@ -32,27 +32,27 @@ public:
 		
 	}
 
-	double get_pos()
+	double get_pos const ()
 	{
 		return pos;
 	}
 	
-	string get_origin()
+	string get_origin const ()
 	{
 		return origin;
 	}
 
-	string get_destination()
+	string get_destination const ()
 	{
 		return destination;
 	}
 
-	bool get_at_SCE()
+	bool get_at_SCE const ()
 	{
 		return at_SCE;
 	}
 
-	double get_vel()
+	double get_vel const ()
 	{
 		return vel;
 	}
