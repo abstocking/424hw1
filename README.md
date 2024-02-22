@@ -1,4 +1,5 @@
 Homework 1 for AERSP 424
+
 Aspen Stocking
 
 Worked with Jayden Slotnick and Logan Feeney through out the assignment
